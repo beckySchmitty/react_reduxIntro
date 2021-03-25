@@ -2,18 +2,29 @@ import React from "react";
 import Meme from "./Meme"
 import NewMemeForm from "./NewMemeForm"
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 const MemeGenerator = () => {
+    const memes = useSelector(state => state.memes);
     const dispatch = useDispatch();
 
-    let src = useSelector(store => store.src)
-    let topText = useSelector(store => store.topText)
-    let bottomText = useSelector(store => store.bottomText)
-
     function addMeme(newMeme) {
-        dispatch({type: 'addMeme', payload: {src: newMeme.src, topText: newMeme.topText, bottomText: newMeme.bottomText}})
+        dispatch({type: 'ADD_MEME', meme: newMeme})
     }
+
+    function deleteMeme(id) {
+        dispatch({type: "REMOVE_MEME", id });
+      }
+    
+      const allMemes = memes.map(m => (
+        <Meme
+          key={m.id}
+          topText={m.topText}
+          bottomText={m.bottomText}
+          src={m.src}
+          deleteMeme={() => deleteMeme(m.id)}
+        />
+      ));
 
 
     return (
@@ -21,8 +32,7 @@ const MemeGenerator = () => {
             <h1>Meme Generator</h1>
             <NewMemeForm addMeme={addMeme} />
             <h3>Here's your meme:</h3>
-            <Meme src={src} topText={topText} bottomText={bottomText} />
-
+            {allMemes}
         </div>
     )
 

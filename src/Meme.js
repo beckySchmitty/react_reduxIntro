@@ -2,7 +2,7 @@ import React from "react"
 import "./Meme.css";
 
 
-const Meme = ({src, topText, bottomText}) => {
+const Meme = ({id, src, topText, bottomText, deleteMeme}) => {
 
     return (
         <div id="main-div" className="Meme">
@@ -11,6 +11,7 @@ const Meme = ({src, topText, bottomText}) => {
             <img src={src} alt="meme" />
             <span className="bottom-text">{bottomText}</span>
           </div>
+          <button onClick={() => deleteMeme(id)}>X</button>
         </div>
       );
 }
