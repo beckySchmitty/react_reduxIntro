@@ -1,9 +1,9 @@
 const INITIAL_STATE = { memes: []}
 
-const TEST_STATE = { memes: [{id: 1, src: '#', topText: "TOP", bottomText:"BOTTOM"}]}
+// const TEST_STATE = { memes: [{id: 1, src: '#', topText: "TOP", bottomText:"BOTTOM"}]}
 
 
-function rootReducer(state = TEST_STATE, action) {
+function rootReducer(state = INITIAL_STATE, action) {
     if (action.type === "ADD_MEME") {
       return {...state,
         memes: [...state.memes, { ...action.meme }]};
@@ -15,4 +15,4 @@ function rootReducer(state = TEST_STATE, action) {
     return state;
   }
   
-  export default rootReducer;
+export default rootReducer;
